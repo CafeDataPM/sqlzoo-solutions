@@ -48,3 +48,24 @@ SELECT name,
 ROUND (gdp/population, -3)-- In the case of Australia original GDP per-capita 66442 but because we have to round it to -3 in 66000
 FROM world
 WHERE gdp > 1000000000000
+
+--Question 11 : Show the name and capital where the name and the capital have the same number of characters.
+SELECT name, capital
+  FROM world
+ WHERE LENGTH(name) = LENGTH(capital) --LENGTH function returns the length of a string (in bytes)
+
+--Question 12 : Show the name and the capital where the first letters of each match. Don't include countries where the name and the capital are the same word.
+SELECT name, capital
+FROM world
+WHERE LEFT(name,1) = LEFT(capital,1) -- LEFT function extracts a number of characters from a string (starting from left). For example, WHERE LEFT (name,3) will show all the countries and capital names that match the first three letters, like Belize and Belmopan
+AND NOT name = capital
+
+--Question 12 : Find the country that has all the vowels and no spaces in its name.
+SELECT name
+   FROM world
+WHERE name LIKE '%a%' -- indicates that the country could have an 'a' in the name
+AND name LIKE '%e%'
+AND name LIKE '%i%'
+AND name LIKE '%o%'
+AND name LIKE '%u%'
+AND name NOT LIKE '% %' --None of the countries can have more than one vowel
